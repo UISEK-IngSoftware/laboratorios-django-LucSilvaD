@@ -7,7 +7,8 @@ def index(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render({'pokemons': pokemons}, request))
 
-def pokemon(request, pokemon):
+def pokemon(request, id: int):
+    pokemon = Pokemon.objects.get(id=id)
     template = loader.get_template('display_pokemon.html')
     context = {
         'pokemon': pokemon

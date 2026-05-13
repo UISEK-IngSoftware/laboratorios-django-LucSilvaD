@@ -23,6 +23,7 @@ class Pokemon(models.Model):
     type = models.CharField(max_length=30, choices=POKEMON_TYPES, null=False)
     height = models.DecimalField(max_digits=5, decimal_places=2)
     weight = models.DecimalField(max_digits=6, decimal_places=2)
+    trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name

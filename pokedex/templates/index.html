@@ -2,32 +2,48 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <p class="p-2">Bienvenido a tu Pokedex</p>
+<div class="container">
 
-  <h3>Los Pokémons</h3>
+  <h3 class="mb-4" style="color: #222224; font-weight: bold;">Pokémon Registrados</h3>
   <div class="row">
     {% for pokemon in pokemons %}
-      <div class="col-4 mb-4">
-        <div class="card" style="width: 100%;">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 pokemon-card">
           {% if pokemon.picture %}
-            <img src="{{ pokemon.picture.url }}" class="card-img-top" alt="{{ pokemon.name }}">
+            <div class="pokemon-img-bg">
+              <img src="{{ pokemon.picture.url }}" alt="{{ pokemon.name }}">
+            </div>
           {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ pokemon.name | capfirst }}</h5>
-            <p class="card-text">Tipo: {{ pokemon.get_type_display }}</p>
-            <a href="{% url 'pokemon' id=pokemon.id %}" class="btn btn-primary">Ver detalles</a>
+          <div class="card-body d-flex flex-column text-center">
+            <h4 class="card-title mb-3" style="font-weight: bold; color: #222224;">{{ pokemon.name | capfirst }}</h4>
+
+            <div class="d-flex justify-content-around mb-4 text-muted" style="font-size: 0.9rem;">
+                <div>
+                    <i class="fa-solid fa-ruler-vertical"></i> {{ pokemon.height }} m
+                </div>
+                <div>
+                    <i class="fa-solid fa-weight-hanging"></i> {{ pokemon.weight }} kg
+                </div>
+            </div>
+
+            <div class="mt-auto">
+              <a href="{% url 'pokemon' id=pokemon.id %}" class="btn btn-pokedex">
+                  <i class="fa-solid fa-eye me-2"></i> Inspeccionar
+              </a>
+            </div>
           </div>
         </div>
       </div>
     {% endfor %}
   </div>
 
-  <h3 class="mt-4">Los Entrenadores</h3>
-  <ul class="list-group">
+  <h3 class="mt-5 mb-3" style="color: #222224; font-weight: bold;">Directorio de Entrenadores</h3>
+  <ul class="list-group trainer-list mb-5 shadow-sm rounded">
     {% for trainer in trainers %}
-    <li class="list-group-item">
-      <a href="{% url 'trainer' id=trainer.id %}">{{ trainer.first_name }} {{ trainer.last_name }}</a>
+    <li class="list-group-item p-3">
+      <a href="{% url 'trainer' id=trainer.id %}">
+          <i class="fa-solid fa-user me-3 text-secondary"></i> {{ trainer.first_name }} {{ trainer.last_name }}
+      </a>
     </li>
     {% endfor %}
   </ul>

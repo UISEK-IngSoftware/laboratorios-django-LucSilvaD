@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Añadir Pokémon{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="card pokemon-card shadow p-4 mb-5">
+        <h2 class="mb-4 text-center" style="color: #222224; font-weight: bold;">
+            <i class="fa-solid fa-circle-plus text-danger me-2"></i>Registrar Pokémon
+        </h2>
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="mb-3 text-start">
+                    <label for="{{ field.id_for_label }}" class="form-label fw-bold" style="color: #495057;">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div class="form-text text-muted">{{ field.help_text }}</div>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="text-danger small mt-1">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>{{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="d-flex gap-3 mt-5">
+                <a href="{% url 'pokedex:index' %}" class="btn btn-light w-50 py-2 fw-bold" style="border-radius: 25px; border: 2px solid #e9ecef; color: #495057;">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-pokedex w-50 py-2 m-0">
+                    <i class="fa-solid fa-floppy-disk me-2"></i>Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

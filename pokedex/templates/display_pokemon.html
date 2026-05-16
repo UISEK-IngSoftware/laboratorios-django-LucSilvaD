@@ -1,26 +1,52 @@
 {% extends 'base.html' %}
-
 {% block title %}{{ pokemon.name | capfirst }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Detalles del Pokémon</h2>
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ pokemon.name | capfirst }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Tipo: {{ pokemon.get_type_display }}</h6>
-        <p class="card-text">
-            <strong>Peso:</strong> {{ pokemon.weight }} kg <br>
-            <strong>Altura:</strong> {{ pokemon.height }} m <br>
-            <strong>Entrenador:</strong>
-            {% if pokemon.trainer %}
-                <a href="{% url 'trainer' id=pokemon.trainer.id %}">{{ pokemon.trainer.first_name }} {{ pokemon.trainer.last_name }}</a>
-            {% else %}
-                Sin entrenador
-            {% endif %}
-        </p>
-        <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
-      </div>
+<div class="container mt-4" style="max-width: 650px;">
+    <div class="card pokemon-card shadow mb-5" style="border-radius: 20px; border: none; background-color: #ffffff; overflow: hidden;">
+
+        {% if pokemon.picture %}
+            <div class="d-flex justify-content-center align-items-center"
+                 style="height: 350px; background-color: #ffffff; border-bottom: 3px solid #e9ecef;">
+
+                <img src="{{ pokemon.picture.url }}"
+                     alt="{{ pokemon.name }}"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        {% endif %}
+
+        <div class="card-body text-center p-4">
+            <h1 class="card-title mb-3" style="font-weight: bold; color: #222224;">{{ pokemon.name | capfirst }}</h1>
+
+            <div class="d-flex justify-content-center gap-2 mb-4">
+                <span class="badge fs-6 p-2 rounded-pill" style="background-color: #e3350d;">Tipo: {{ pokemon.get_type_display }}</span>
+            </div>
+
+            <div class="row text-muted mb-4 fs-6 py-2 rounded" style="background-color: #f8f9fa;">
+                <div class="col-6 border-end">
+                    <i class="fa-solid fa-ruler-vertical me-2"></i><strong>Altura:</strong> {{ pokemon.height }} cm
+                </div>
+                <div class="col-6">
+                    <i class="fa-solid fa-weight-hanging me-2"></i><strong>Peso:</strong> {{ pokemon.weight }} kg
+                </div>
+            </div>
+
+            <div class="p-3 mb-4 rounded text-start" style="background-color: #e2f2f8; border: 1px solid #d0eaf5;">
+                <i class="fa-solid fa-user text-secondary me-2"></i>
+                <strong style="color: #222224;">Entrenador Asignado:</strong>
+                {% if pokemon.trainer %}
+                    <a href="{% url 'pokedex:trainer' id=pokemon.trainer.id %}" class="text-decoration-none ms-2" style="color: #1b82b1; font-weight: 600;">
+                        {{ pokemon.trainer.first_name }} {{ pokemon.trainer.last_name }}
+                    </a>
+                {% else %}
+                    <span class="text-muted ms-2">Sin entrenador</span>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'pokedex:index' %}" class="btn btn-pokedex">
+                <i class="fa-solid fa-arrow-left me-2"></i> Volver a la Lista General
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

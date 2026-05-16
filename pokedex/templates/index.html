@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
-
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
   <p class="p-2">Bienvenido a tu Pokedex</p>
-  
+
   <h3>Los Pokémons</h3>
-  <ul class="list-group">
+  <div class="row">
     {% for pokemon in pokemons %}
-    <li class="list-group-item">
-      <a href="{% url 'pokemon' id=pokemon.id %}">{{ pokemon.name | capfirst }}</a>
-    </li>
+      <div class="col-4 mb-4">
+        <div class="card" style="width: 100%;">
+          {% if pokemon.picture %}
+            <img src="{{ pokemon.picture.url }}" class="card-img-top" alt="{{ pokemon.name }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ pokemon.name | capfirst }}</h5>
+            <p class="card-text">Tipo: {{ pokemon.get_type_display }}</p>
+            <a href="{% url 'pokemon' id=pokemon.id %}" class="btn btn-primary">Ver detalles</a>
+          </div>
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 
   <h3 class="mt-4">Los Entrenadores</h3>
   <ul class="list-group">

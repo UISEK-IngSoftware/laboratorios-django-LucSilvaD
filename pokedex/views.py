@@ -17,6 +17,10 @@ def trainer(request, id):
     trainer = Trainer.objects.get(id=id)
     return render(request, "display_trainer.html", {"trainer": trainer})
 
+def trainers(request):
+    trainers = Trainer.objects.all()
+    return render(request, "trainers.html", {"trainers": trainers})
+
 @login_required
 def add_pokemon(request):
     if request.method == 'POST':

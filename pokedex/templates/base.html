@@ -31,6 +31,10 @@
                   <i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
               </li>
               {% else %}
+              <li class="trainers-link nav-item">
+                <a class="nav-link" href="{% url 'pokedex:trainers' %}">
+                  <i class="fas fa-users"></i> Entrenadores</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">
                   <i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>

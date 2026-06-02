@@ -52,16 +52,5 @@
       </div>
     {% endfor %}
   </div>
-
-  <h3 class="mt-5 mb-3" style="color: #222224; font-weight: bold;">Directorio de Entrenadores</h3>
-  <ul class="list-group trainer-list mb-5 shadow-sm rounded">
-    {% for trainer in trainers %}
-    <li class="list-group-item p-3">
-      <a href="{% url 'pokedex:trainer' id=trainer.id %}">
-          <i class="fa-solid fa-user me-3 text-secondary"></i> {{ trainer.first_name }} {{ trainer.last_name }}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
 </div>
 {% endblock %}

@@ -5,10 +5,22 @@ body {
 
 .pokedex-header {
   background-color: #e3350d;
-  border-bottom: 6px solid #222224;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 0;
+  border-radius: 15px 15px 0 0;
+}
+
+.pokedex-navbar {
+  background-color: #30a7d7 !important;
   border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   margin-bottom: 2rem;
+}
+.pokedex-navbar .nav-link {
+  color: #245586 !important;
+}
+
+.pokedex-navbar .nav-link:hover {
+  color: #db6e07 !important;
 }
 
 .pokemon-card {

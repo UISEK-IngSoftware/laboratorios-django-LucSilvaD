@@ -18,7 +18,9 @@ class Pokemon(models.Model):
         ('T', 'Tierra'),
         ('P', 'Planta'),
         ('E', 'Eléctrico'),
-        ('L', 'Lagartija')
+        ('L', 'Lagartija'),
+        ('V', 'Volador'),
+        ('R', 'Roca'),
     }
     type = models.CharField(max_length=30, choices=POKEMON_TYPES, null=False)
     height = models.DecimalField(max_digits=5, decimal_places=2)
